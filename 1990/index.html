@@ -79,26 +79,31 @@
 </head>
 <body>
     <div class="image-container" id="imageContainer">
-        <!-- 集合写真 -->
-        <img src="group_photo.png" alt="集合写真" class="base-photo" id="basePhoto">
-        <!-- 人型の輪郭画像 -->
+        <img src="dummy_placeholder.png" alt="集合写真" class="base-photo" id="basePhoto">
         <img src="group_outline.png" alt="輪郭と名前" class="outline-overlay" id="outlineOverlay">
     </div>
 
     <script>
+        const basePhoto = document.getElementById('basePhoto');
         const imageContainer = document.getElementById('imageContainer');
         const outlineOverlay = document.getElementById('outlineOverlay');
 
-        // 2, 3. クリックで輪郭画像の表示・非表示を切り替える機能
+        function setPhotoSource() {
+            const passcode = prompt('パスコードを入力してください:');
+
+            if (passcode) {
+                const imageFileName = `${passcode}_photo.png`; 
+                basePhoto.src = imageFileName;
+            } else {
+                basePhoto.src = "notfound.png";
+            }
+        }
+
         imageContainer.addEventListener('click', () => {
-            outlineOverlay.classList.toggle('visible');
+             outlineOverlay.classList.toggle('visible');
         });
 
-        // 4. スマホ対応（拡大縮小機能）
-        // ピンチ操作はブラウザ標準のズーム機能に依存します。
-        // viewport metaタグでユーザーによるスケーリングを許可しているため、
-        // PCではCtrl(Cmd) + マウスホイール、スマホではピンチ操作で拡大縮小可能です。
-        // 縦横の変更はCSSの max-width: 100vw; max-height: 100vh; で自動対応します。
+        setPhotoSource();
 
     </script>
 </body>

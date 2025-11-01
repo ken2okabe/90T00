@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>千葉大学工学部工業意匠学科平成2年度入学生集合写真(1990.04.09)</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden; /* ウインドウ全体のスクロールを禁止 */
+        }
+
+        .image-container {
+            position: relative;
+            cursor: pointer;
+            /* 画像の元のサイズに合わせて初期サイズを設定 */
+            width: 100%; 
+            height: auto;
+            max-width: 100vw;
+            max-height: 100vh;
+            /* 初期表示を画面サイズにフィットさせるための設定 */
+            object-fit: contain; 
+            transition: transform 0.3s ease; /* 拡大縮小時のアニメーション */
+        }
+
+        .base-photo {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .outline-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0; /* 初期状態では非表示 */
+            transition: opacity 0.5s ease-in-out; /* フェードイン・アウトのアニメーション */
+            pointer-events: none; /* クリックイベントが下の写真に伝わるようにする */
+        }
+
+        .outline-overlay.visible {
+            opacity: 0.7; /* 半透明で表示 */
+        }
+
+        .info-text {
+            position: absolute; /* .image-container を基準に配置 */
+            color: white; /* 文字色 */
+            background-color: rgba(0, 0, 0, 0.7); /* 半透明の黒背景 */
+            padding: 8px 12px;
+            border-radius: 5px;
+            z-index: 10; /* 他の要素より前面に表示 */
+            pointer-events: none; /* テキスト上でのクリックを無効にし、下の写真をクリック可能にする */
+        }
+
+        .title {
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%); /* 中央寄せ */
+            font-size: 1.1em;
+            font-weight: bold;
+            white-space: nowrap; /* テキストの折り返しを防ぐ */
+        }
+
+        .caption {
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%); /* 中央寄せ */
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+<body>
+    <div class="image-container" id="imageContainer">
+        <!-- 集合写真 -->
+        <img src="group_photo.png" alt="集合写真" class="base-photo" id="basePhoto">
+        <!-- 人型の輪郭画像 -->
+        <img src="group_outline.png" alt="輪郭と名前" class="outline-overlay" id="outlineOverlay">
+    </div>
+
+    <script>
+        const imageContainer = document.getElementById('imageContainer');
+        const outlineOverlay = document.getElementById('outlineOverlay');
+
+        // 2, 3. クリックで輪郭画像の表示・非表示を切り替える機能
+        imageContainer.addEventListener('click', () => {
+            outlineOverlay.classList.toggle('visible');
+        });
+
+        // 4. スマホ対応（拡大縮小機能）
+        // ピンチ操作はブラウザ標準のズーム機能に依存します。
+        // viewport metaタグでユーザーによるスケーリングを許可しているため、
+        // PCではCtrl(Cmd) + マウスホイール、スマホではピンチ操作で拡大縮小可能です。
+        // 縦横の変更はCSSの max-width: 100vw; max-height: 100vh; で自動対応します。
+
+    </script>
+</body>
+</html>
